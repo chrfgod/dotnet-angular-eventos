@@ -6,15 +6,22 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AppRoutingModule } from './app-routing.module';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { EventosComponent } from './eventos/eventos.component';
-import { HttpClientModule } from '@angular/common/http';
+import { PalestrantesComponent } from './palestrantes/palestrantes.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ContatosComponent } from './contatos/contatos.component';
 import { NavComponent } from './nav/nav.component';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TituloComponent } from './_shared/titulo/titulo.component';
+
 
 
 import { DateTimeFormatPipePipe } from './_helps/DateTimeFormatPipe.pipe';
+
 
 
 @NgModule({
@@ -22,7 +29,11 @@ import { DateTimeFormatPipePipe } from './_helps/DateTimeFormatPipe.pipe';
     AppComponent,
     EventosComponent,
     NavComponent,
-    DateTimeFormatPipePipe
+    DateTimeFormatPipePipe,
+    PalestrantesComponent,
+    DashboardComponent,
+    ContatosComponent,
+    TituloComponent,
    ],
   imports: [
     BrowserModule,
@@ -31,6 +42,7 @@ import { DateTimeFormatPipePipe } from './_helps/DateTimeFormatPipe.pipe';
     BsDatepickerModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
+    ToastrModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
     FormsModule,

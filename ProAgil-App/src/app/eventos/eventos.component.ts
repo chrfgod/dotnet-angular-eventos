@@ -8,6 +8,7 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { ptBrLocale } from 'ngx-bootstrap/locale';
 import { templateJitUrl } from '@angular/compiler';
+import { ToastrService } from 'ngx-toastr';
 
 defineLocale('pt-br', ptBrLocale);
 
@@ -18,6 +19,8 @@ defineLocale('pt-br', ptBrLocale);
   styleUrls: ['./eventos.component.scss']
 })
 export class EventosComponent implements OnInit {
+
+  title = 'Eventos';
 
   eventosFiltrados: Evento [];
   eventos: Evento [];
@@ -35,6 +38,7 @@ export class EventosComponent implements OnInit {
     private eventoService: EventoService,
     private modalService: BsModalService,
     private fb: FormBuilder,
+    private toastr: ToastrService,
     private localeService: BsLocaleService){ 
       this.localeService.use('pt-br');
     }
@@ -80,7 +84,9 @@ export class EventosComponent implements OnInit {
       () => {
           template.hide();
           this.getEventos();
+          this.toastr.success('Deletado com sucesso');
         }, error => {
+          this.toastr.error(`Erro ao deletar ${error}`);
           console.log(error);
         }
     );
@@ -120,7 +126,9 @@ export class EventosComponent implements OnInit {
         (novoEvento: Evento) => {
           template.hide();
           this.getEventos();
+          this.toastr.success('Inserido com sucesso');
         }, error => {
+          this.toastr.error(`Erro ao inserir ${error}`);
           console.log(error);
         }
       );
@@ -131,13 +139,14 @@ export class EventosComponent implements OnInit {
         () => {
           template.hide();
           this.getEventos();
+          this.toastr.success('Editado com sucesso');
         }, error => {
+          this.toastr.error(`Erro ao editar ${error}`);
           console.log(error);
         }
       );
 
       }
-      
     }
   }
   // tslint:disable-next-line: typedef
@@ -145,9 +154,10 @@ export class EventosComponent implements OnInit {
     this.eventoService.getAllEvento().subscribe(
       // tslint:disable-next-line: variable-name
       (_eventos: Evento[]) => {
-      this.eventosFiltrados = this.eventos = _eventos;
+      this.eventos = _eventos;
+      this.eventosFiltrados = this.eventos;
     }, error => {
-      console.log(error);
+      this.toastr.error(`Erro ao tentar carregar eventos ${error}`);
     });
   }
 }

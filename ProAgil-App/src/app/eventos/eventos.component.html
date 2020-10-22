@@ -1,3 +1,4 @@
+<app-titulo [title]="title"></app-titulo>
 <div class="d-flex">
 <div class="form-inline mr-auto">
   <div class="form-group mb-2">
@@ -38,7 +39,7 @@
       </td>
       <td>{{evento.tema}}</td>
       <td>{{evento.local}}</td>
-      <td>{{evento.dataEvento |DateTimeFormatPipe}}</td>
+      <td>{{evento.dataEvento}}</td>
       <td>{{evento.qtdPessoas}}</td>
       <td>
         <div *ngIf="!evento.lotes.length">
@@ -62,7 +63,7 @@
       </td>
     </tr>
   </tbody>
-  <tfoot *ngIf="!eventos.length">
+  <tfoot *ngIf="!eventos">
     <tr>
       <td colspan="7" class="text-center">
         <h4>Nenhum evento encontrado!</h4>
