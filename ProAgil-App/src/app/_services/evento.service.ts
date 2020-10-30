@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Evento } from '../_models/Evento';
@@ -8,11 +8,16 @@ import { Evento } from '../_models/Evento';
 })
 export class EventoService {
   baseURL = 'http://localhost:5000/api/evento';
+ 
 
-constructor(private http: HttpClient) { }
+constructor(private http: HttpClient) {
+  // tslint:disable-next-line: object-literal-key-quotes
+}
 
   // tslint:disable-next-line: typedef
   getAllEvento(): Observable<Evento[]>{
+    // tslint:disable-next-line: object-literal-key-quotes
+
     return this.http.get<Evento[]>(this.baseURL);
   }
   getEventoById(id: number): Observable<Evento>{

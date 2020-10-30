@@ -47,7 +47,7 @@ namespace ProAgil.API.Controllers
             try
             {
                 var user = _Mapper.Map<User>(userDto);
-                var result = await _UserManager.CreateAsync(user, userDto.Password);
+                var result = await _UserManager.CreateAsync(user, userDto.password);
                 var userToReturn = _Mapper.Map<UserDto>(user);
 
                 if (result.Succeeded){

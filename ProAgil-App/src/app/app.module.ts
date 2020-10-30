@@ -14,13 +14,18 @@ import { PalestrantesComponent } from './palestrantes/palestrantes.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ContatosComponent } from './contatos/contatos.component';
 import { NavComponent } from './nav/nav.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TituloComponent } from './_shared/titulo/titulo.component';
 
 
 
 import { DateTimeFormatPipePipe } from './_helps/DateTimeFormatPipe.pipe';
+import { LoginComponent } from './user/login/login.component';
+import { RegistrationComponent } from './user/registration/registration.component';
+import { UserComponent } from './user/user.component';
+import { EventoService } from './_services/evento.service';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 
 
@@ -34,6 +39,9 @@ import { DateTimeFormatPipePipe } from './_helps/DateTimeFormatPipe.pipe';
     DashboardComponent,
     ContatosComponent,
     TituloComponent,
+    UserComponent,
+    LoginComponent,
+    RegistrationComponent
    ],
   imports: [
     BrowserModule,
@@ -48,7 +56,14 @@ import { DateTimeFormatPipePipe } from './_helps/DateTimeFormatPipe.pipe';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    EventoService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
