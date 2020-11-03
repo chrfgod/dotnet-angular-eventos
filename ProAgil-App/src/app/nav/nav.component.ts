@@ -20,6 +20,10 @@ export class NavComponent implements OnInit {
   ngOnInit() {
   }
 
+  showMenu(){
+    return this.router.url !== '/user/login';
+  }
+
   // tslint:disable-next-line: typedef
   loggedIn(){
     return this.authService.loggedIn();
