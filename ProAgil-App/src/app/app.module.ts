@@ -5,11 +5,15 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AppRoutingModule } from './app-routing.module';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxMaskModule } from 'ngx-mask';
+import { NgxCurrencyModule } from 'ngx-currency';
 
 import { AppComponent } from './app.component';
 import { EventosComponent } from './eventos/eventos.component';
+import { EventoEditComponent } from './eventos/eventoEdit/eventoEdit.component';
 import { PalestrantesComponent } from './palestrantes/palestrantes.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ContatosComponent } from './contatos/contatos.component';
@@ -33,6 +37,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
   declarations: [
     AppComponent,
     EventosComponent,
+    EventoEditComponent,
     NavComponent,
     DateTimeFormatPipePipe,
     PalestrantesComponent,
@@ -51,6 +56,9 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
     ToastrModule.forRoot(),
+    TabsModule.forRoot(),
+    NgxMaskModule.forRoot(),
+    NgxMaskModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,

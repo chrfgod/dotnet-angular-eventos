@@ -8,6 +8,7 @@ using ProAgil.API.Dtos;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http.Headers;
+using System.Linq;
 
 namespace ProAgil.API.Controllers
 
@@ -129,8 +130,27 @@ namespace ProAgil.API.Controllers
         {
             try
             {
+                var idLotes = new List<int>();
+                var idRedesSociais = new List<int>();
+
+                foreach (var item in model.Lotes){
+                    idLotes.Add(item.Id);   
+                }             
+                foreach (var item in model.RedesSociais){
+                    idRedesSociais.Add(item.Id);  
+                }                
+               
                 var evento = await _repo.GetEventoAsyncById(EventoId, false);
                 if(evento == null) return NotFound();
+
+                var lotes = evento.Lotes.Where(lote => !idLotes.Contains(lote.Id)).ToList<Lote>();
+                var redesSociais = evento.RedesSociais.Where(rede => !idRedesSociais.Contains(rede.Id)).ToList<RedeSocial>();
+
+                if (lotes.Count > 0)
+                    lotes.ForEach(lote => _repo.Delete(lote));
+
+                if (redesSociais.Count > 0)
+                    redesSociais.ForEach(rede => _repo.Delete(rede));
 
                 _mapper.Map(model, evento);
 
